@@ -13,6 +13,18 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+const pool = require('./config/db');
+
+app.get('/test', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW()');
+    res.send(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Database error');
+  }
+});
+
 app.use((req, res, next) => {
     res.status(404);
     const error = new Error(`Not Found - ${req.originalUrl}`);

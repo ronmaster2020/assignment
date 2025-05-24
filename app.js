@@ -3,6 +3,8 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const errorHandler = require('./middleware/errorHandler');
+const uploadRoutes = require('./routes/uploadRoutes');
+const ApiError = require('./utils/ApiError');
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
@@ -15,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parse application/json
 app.use(bodyParser.json());
 
+// Use routes
+app.use('/', uploadRoutes);
+
 // Basic route
 app.get('/', (req, res) => {
     res.render('index');
@@ -22,8 +27,7 @@ app.get('/', (req, res) => {
 
 // 404 middleware
 app.use((req, res, next) => {
-    res.status(404);
-    const error = new Error(`Not Found - ${req.originalUrl}`);
+    const error = new ApiError(404, `Not Found - ${req.originalUrl}`);
     next(error); // pass to error handler
 });
 

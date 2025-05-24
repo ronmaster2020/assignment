@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const errorHandler = require('./middleware/errorHandler');
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
@@ -12,5 +13,12 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.use((req, res, next) => {
+    res.status(404);
+    const error = new Error(`Not Found - ${req.originalUrl}`);
+    next(error); // pass to error handler
+});
+
+app.use(errorHandler);
 // Export the app instead of starting it
 module.exports = app; 

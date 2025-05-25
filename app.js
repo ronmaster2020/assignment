@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const errorHandler = require('./middleware/errorHandler');
 const routes = require("./routes");
-const ApiError = require('./utils/ApiError');
+const notFound = require("./middleware/notFound");
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
@@ -17,13 +17,11 @@ app.use(bodyParser.json()); // Parse application/json
 // Use routes
 app.use(routes);
 
-// 404 middleware
-app.use((req, res, next) => {
-    const error = new ApiError(404, `Not Found - ${req.originalUrl}`);
-    next(error); // pass to error handler
-});
+// 404 middleware - after all routes
+app.use(notFound);
 
 // Error handler
 app.use(errorHandler);
+
 // Export the app instead of starting it
 module.exports = app; 

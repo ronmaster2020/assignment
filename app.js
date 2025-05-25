@@ -1,10 +1,10 @@
 const express = require("express");
+const app = express();
+require("dotenv").config();
 const path = require("path");
 const routes = require("./routes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
-
-const app = express();
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")));
@@ -19,6 +19,16 @@ app.use(express.json());
 
 // Register routes
 app.use(routes);
+
+// Serve static files from the React app in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+
+  // Handle React routing, return all requests to React app
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
 
 // 404 handler (must come after routes)
 app.use(notFound);

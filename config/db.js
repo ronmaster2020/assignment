@@ -1,10 +1,10 @@
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 
 // Setup connection pool
 const pool = new Pool({
-  user: 'ron',
-  host: 'localhost',
-  database: 'assignment',
+  user: "ron",
+  host: "localhost",
+  database: "assignment",
   port: 5432,
 });
 

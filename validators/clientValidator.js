@@ -1,11 +1,11 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 const clientSchema = Joi.object({
   full_name: Joi.string().max(255).required(),
   email: Joi.string().email().max(255).required(),
   phone: Joi.string().max(50).required(),
   short_description: Joi.string().max(1000).required(),
-  company_name: Joi.string().max(255).optional().allow('')
+  company_name: Joi.string().max(255).optional().allow(""),
 });
 
 module.exports = clientSchema;

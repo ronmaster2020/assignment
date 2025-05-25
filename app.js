@@ -1,17 +1,17 @@
-const express = require('express');
-const path = require('path');
-const routes = require('./routes');
-const notFound = require('./middleware/notFound');
-const errorHandler = require('./middleware/errorHandler');
+const express = require("express");
+const path = require("path");
+const routes = require("./routes");
+const notFound = require("./middleware/notFound");
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Set EJS as view engine and define views directory
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 // Parse form data and JSON using built-in Express middleware
 app.use(express.urlencoded({ extended: true }));

@@ -3,8 +3,7 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const errorHandler = require('./middleware/errorHandler');
-const clientRoutes = require('./routes/clientRoutes');
-const candidateRoutes = require('./routes/candidateRoutes');
+const routes = require("./routes");
 const ApiError = require('./utils/ApiError');
 
 // Serve static files from the 'public' directory
@@ -12,20 +11,11 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-// Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Parse application/json
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // Parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // Parse application/json
 
 // Use routes
-app.use('/api/leads/client', clientRoutes);
-app.use('/api/leads/candidate', candidateRoutes);
-
-// Basic route
-app.get('/', (req, res) => {
-    res.render('index');
-});
+app.use(routes);
 
 // 404 middleware
 app.use((req, res, next) => {

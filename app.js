@@ -10,19 +10,19 @@ const errorHandler = require("./middleware/errorHandler");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve static files from the Vite build
-app.use(express.static(path.join(__dirname, "Vite-project/dist")));
-
 // API routes
 app.use("/api", routes);
 
-// Handle React routing, return all requests to React app
+// Serve static files from the Vite build
+app.use(express.static(path.join(__dirname, "Vite-project/dist")));
+
+// Catch-all: serve index.html for client-side routing
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "Vite-project/dist", "index.html"));
 });
 
-// 404 handler (must come after routes)
-app.use(notFound);
+// 404 handler for API
+app.use("/api", notFound);
 
 // Centralized error handler
 app.use(errorHandler);

@@ -3,7 +3,6 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const errorHandler = require('./middleware/errorHandler');
-const uploadRoutes = require('./routes/uploadRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const candidateRoutes = require('./routes/candidateRoutes');
 const ApiError = require('./utils/ApiError');
@@ -20,17 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Use routes
-app.use('/', uploadRoutes);
 app.use('/api/leads/client', clientRoutes);
 app.use('/api/leads/candidate', candidateRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
     res.render('index');
-});
-
-app.get('/form', (req, res) => {
-    res.render('form');
 });
 
 // 404 middleware

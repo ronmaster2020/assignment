@@ -3,7 +3,7 @@ const asyncHandler = require('../utils/asyncHandler');
 const pool = require('../config/db');
 
 const clientController = {
-    // Create a new client
+    // Create a new potential client
     createClient: asyncHandler(async (req, res) => {
         const { full_name, company_name, email, phone, short_description } = req.body;
 
@@ -18,7 +18,7 @@ const clientController = {
         const result = await pool.query(query, values)
         const insertedClient = result.rows[0];
 
-        console.log('Inserted user:', insertedClient);
+        console.log('Inserted Client:', insertedClient);
 
         res.status(201).json({
             status: 'success',

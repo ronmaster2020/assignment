@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const errorHandler = require('./middleware/errorHandler');
 const uploadRoutes = require('./routes/uploadRoutes');
 const clientRoutes = require('./routes/clientRoutes');
+const candidateRoutes = require('./routes/candidateRoutes');
 const ApiError = require('./utils/ApiError');
 
 // Serve static files from the 'public' directory
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 // Use routes
 app.use('/', uploadRoutes);
 app.use('/api/leads/client', clientRoutes);
+app.use('/api/leads/candidate', candidateRoutes);
 
 // Basic route
 app.get('/', (req, res) => {

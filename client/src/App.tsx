@@ -4,7 +4,7 @@ import Image from "./components/Image";
 
 function App() {
   return (
-    <div>
+    <div className="h-full min-h-screen bg-gray-100">
       <Header>
         <Image />
       </Header>

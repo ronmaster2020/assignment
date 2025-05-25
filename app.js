@@ -6,29 +6,20 @@ const routes = require("./routes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "public")));
-
-// Set EJS as view engine and define views directory
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-
 // Parse form data and JSON using built-in Express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Register routes
-app.use(routes);
+// Serve static files from the Vite build
+app.use(express.static(path.join(__dirname, "Vite-project/dist")));
 
-// Serve static files from the React app in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+// API routes
+app.use("/api", routes);
 
-  // Handle React routing, return all requests to React app
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
-}
+// Handle React routing, return all requests to React app
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "Vite-project/dist", "index.html"));
+});
 
 // 404 handler (must come after routes)
 app.use(notFound);

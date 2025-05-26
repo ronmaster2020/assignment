@@ -48,6 +48,7 @@ main {
   background-color: #007bff;
   border-radius: 24px;
   color: #fff;
+  width: 100%;
 }
 
 .info-card h5 {

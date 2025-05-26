@@ -12,7 +12,12 @@ export class ApiError extends Error {
 
 export const handleApiError = async (response: Response) => {
   if (!response.ok) {
-    const errorData = await response.json();
+    let errorData;
+    try {
+      errorData = await response.json();
+    } catch {
+      errorData = { message: response.statusText };
+    }
     throw new ApiError(
       response.status,
       errorData.message || 'An error occurred',

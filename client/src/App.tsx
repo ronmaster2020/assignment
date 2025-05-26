@@ -7,6 +7,7 @@ import IconParagraph from "./components/IconParagraph";
 import TextSection from "./components/TextSection";
 import InfoCard from "./components/InfoCard";
 import HeroSection from "./components/HeroSection";
+import SuccessMessage from "./components/SuccessMessage";
 
 function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -97,11 +98,12 @@ function App() {
           />
         </div>
         <h5 className="section-heading mt-5 mb-4">Contact Us</h5>
-        <div className="container">
+        <div className="container mb-4 pb-2">
           {formSubmitted ? (
-            <div className="alert alert-success text-center">
-              Thank you! Your message has been received. 🚀
-            </div>
+            <SuccessMessage
+              heading="Thanks from SprintIgnite!"
+              message="We've received your details and are on it! Expect a swift response from our team. We're ready to get things moving!"
+            />
           ) : (
             <>
               <ClientForm onSubmitSuccess={handleFormSubmit} />

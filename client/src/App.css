@@ -268,3 +268,22 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+.success-message-container {
+  margin-bottom: 40px;
+}
+
+.success-message-container .success-message-heading {
+  color: #ff6f00;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+
+.success-message-container .success-message-text {
+  color: #ff6f00;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}

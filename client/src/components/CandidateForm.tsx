@@ -163,7 +163,7 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
               </div>
             </div>
 
-            <div className="d-grid mb-5">
+            <div className="d-grid">
               <button type="submit" className="btn submit-btn">
                 Apply Now
               </button>

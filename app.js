@@ -2,9 +2,13 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const path = require("path");
+const cors = require("cors");
 const routes = require("./routes");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Parse form data and JSON using built-in Express middleware
 app.use(express.urlencoded({ extended: true }));

@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-
-type FormData = {
-  FullName: string;
-  Email: string;
-  Phone: string;
-  Resume: File | string;
-};
+import { ApiError, handleApiError } from "../utils/apiError";
 
 const CandidateForm = () => {
-  const [formData, setFormData] = useState<FormData>({
-    FullName: "",
-    Email: "",
-    Phone: "",
-    Resume: "",
+  const [formData, setFormData] = useState<{
+    full_name: string;
+    email: string;
+    phone: string;
+    resume: File | string;
+  }>({
+    full_name: "",
+    email: "",
+    phone: "",
+    resume: "",
   });
+
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   const updateFormData = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,8 +37,41 @@ const CandidateForm = () => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setError("");
+    setSuccess("");
+
+    try {
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
+
+      const response = await fetch(
+        "http://localhost:3000/api/leads/candidate",
+        {
+          method: "POST",
+          body: formDataToSend,
+        }
+      );
+
+      const data = await handleApiError(response);
+      setSuccess("Application submitted successfully!");
+      // Reset form
+      setFormData({
+        full_name: "",
+        email: "",
+        phone: "",
+        resume: "",
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
+    }
   };
 
   return (
@@ -49,18 +84,28 @@ const CandidateForm = () => {
           </p>
 
           <form onSubmit={handleSubmit}>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
+            {success && (
+              <div className="alert alert-success" role="alert">
+                {success}
+              </div>
+            )}
             <div className="form-group mb-2">
               <input
                 type="text"
                 className="form-control"
-                id="FullName"
+                id="full_name"
                 placeholder=" "
-                name="FullName"
-                value={formData.FullName}
+                name="full_name"
+                value={formData.full_name}
                 onChange={updateFormData}
                 required
               />{" "}
-              <label htmlFor="FullName" className="form-label">
+              <label htmlFor="full_name" className="form-label">
                 Full Name
               </label>
             </div>
@@ -69,14 +114,14 @@ const CandidateForm = () => {
               <input
                 type="email"
                 className="form-control"
-                id="Email"
+                id="email"
                 placeholder=" "
-                name="Email"
-                value={formData.Email}
+                name="email"
+                value={formData.email}
                 onChange={updateFormData}
                 required
               />{" "}
-              <label htmlFor="Email" className="form-label">
+              <label htmlFor="email" className="form-label">
                 Email
               </label>
             </div>
@@ -85,15 +130,15 @@ const CandidateForm = () => {
               <input
                 type="tel"
                 className="form-control"
-                id="Phone"
+                id="phone"
                 placeholder=" "
-                name="Phone"
-                value={formData.Phone}
+                name="phone"
+                value={formData.phone}
                 onChange={updateFormData}
                 required
                 pattern="[0-9]{10}"
               />{" "}
-              <label htmlFor="Phone" className="form-label">
+              <label htmlFor="phone" className="form-label">
                 Phone
               </label>
             </div>
@@ -102,8 +147,8 @@ const CandidateForm = () => {
               <div className="file-upload">
                 <input
                   type="file"
-                  id="Resume"
-                  name="Resume"
+                  id="resume"
+                  name="resume"
                   accept=".pdf"
                   onChange={updateFormData}
                 />

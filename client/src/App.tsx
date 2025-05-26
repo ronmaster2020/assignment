@@ -1,6 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import ClientForm from "./components/ClientForm";
+import CandidateForm from "./components/CandidateForm";
 
 function App() {
   return (
@@ -12,7 +14,7 @@ function App() {
 
       {/* Body */}
       <main>
-        <h1 className="main-heading display-4 text-center">
+        <h1 className="main-heading display-4 text-center fw-bold">
           Igniting Your Development at Record Speed!
         </h1>
         <p className="main-description text-center pb-3 mb-3">
@@ -111,179 +113,8 @@ function App() {
         </p>
 
         <h5 className="section-heading mt-5 mb-4">Contact Us</h5>
-        <div className="form-container container mb-4">
-          <div className="row justify-content-center">
-            <div className="col-md-5">
-              <h5 className="form-heading text-start">For Potential Clients</h5>
-              <p className="form-description text-start text-muted">
-                Deadline looming? Project stuck? Don't wait. Talk to us today
-                and let's ignite your project together!
-              </p>
-
-              <form>
-                <div className="form-group mb-2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="FullName"
-                    placeholder=" "
-                    name="FullName"
-                    value=""
-                    required
-                  />{" "}
-                  <label htmlFor="FullName" className="form-label">
-                    Full Name
-                  </label>
-                </div>
-
-                <div className="form-group mb-2">
-                  <input
-                    type="Company Name"
-                    className="form-control"
-                    id="CompanyName"
-                    placeholder=" "
-                    name="CompanyName"
-                    value=""
-                    required
-                  />{" "}
-                  <label htmlFor="CompanyName" className="form-label">
-                    Company Name
-                  </label>
-                </div>
-
-                <div className="form-group mb-2">
-                  <input
-                    type="Email"
-                    className="form-control"
-                    id="Email"
-                    placeholder=" "
-                    name="Email"
-                    value=""
-                    required
-                  />{" "}
-                  <label htmlFor="Email" className="form-label">
-                    Email
-                  </label>
-                </div>
-
-                <div className="form-group mb-2">
-                  <input
-                    type="Phone"
-                    className="form-control"
-                    id="Phone"
-                    placeholder=" "
-                    name="Phone"
-                    value=""
-                    required
-                  />{" "}
-                  <label htmlFor="Phone" className="form-label">
-                    Phone
-                  </label>
-                </div>
-
-                <div className="form-group mb-4">
-                  <textarea
-                    className="form-control"
-                    id="Description"
-                    placeholder=" "
-                    name="Description"
-                    rows={3}
-                    required
-                  />{" "}
-                  <label htmlFor="Description" className="form-label">
-                    Short Project Description/Need
-                  </label>
-                </div>
-
-                <div className="d-grid">
-                  <button type="submit" className="btn submit-btn">
-                    Send Request
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div className="form-container container">
-          <div className="row justify-content-center">
-            <div className="col-md-5">
-              <h5 className="form-heading text-start">
-                For Potential Candidates
-              </h5>
-              <p className="form-description text-start text-muted">
-                Want to Join a Fast-Paced, Impactful Team?
-              </p>
-
-              <form>
-                <div className="form-group mb-2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="FullName"
-                    placeholder=" "
-                    name="FullName"
-                    value=""
-                    required
-                  />{" "}
-                  <label htmlFor="FullName" className="form-label">
-                    Full Name
-                  </label>
-                </div>
-
-                <div className="form-group mb-2">
-                  <input
-                    type="Email"
-                    className="form-control"
-                    id="Email"
-                    placeholder=" "
-                    name="Email"
-                    value=""
-                    required
-                  />{" "}
-                  <label htmlFor="Email" className="form-label">
-                    Email
-                  </label>
-                </div>
-
-                <div className="form-group mb-2">
-                  <input
-                    type="Phone"
-                    className="form-control"
-                    id="Phone"
-                    placeholder=" "
-                    name="Phone"
-                    value=""
-                    required
-                  />{" "}
-                  <label htmlFor="Phone" className="form-label">
-                    Phone
-                  </label>
-                </div>
-
-                <div className="form-group mb-4">
-                  <div className="file-upload">
-                    <input type="file" accept=".pdf" />
-                    <div className="icon-wrapper">
-                      <img
-                        className="icon"
-                        src="/icons/Icon_upload.png"
-                        alt="upload icon"
-                      />
-                    </div>
-                    <div>Upload your CV</div>
-                    <small>Drag and drop your file here</small>
-                  </div>
-                </div>
-
-                <div className="d-grid mb-5">
-                  <button type="submit" className="btn submit-btn">
-                    Apply Now
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        <ClientForm />
+        <CandidateForm />
       </main>
       <div className="footer-wrapper">
         <footer className="footer">

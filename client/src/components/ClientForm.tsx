@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { ApiError, handleApiError } from "../utils/apiError";
 
 const ClientForm = () => {
-  const [FormData, setFormData] = useState({
-    FullName: "",
-    CompanyName: "",
-    Email: "",
-    Phone: "",
-    Description: "",
+  const [formData, setFormData] = useState({
+    full_name: "",
+    company_name: "",
+    email: "",
+    phone: "",
+    short_description: "",
   });
+
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   const updateFormData = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,8 +23,42 @@ const ClientForm = () => {
     }));
   };
 
-  const HandleFormSubmition = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setError("");
+    setSuccess("");
+
+    // Log form data
+    console.log("Sending data:");
+    Object.entries(formData).forEach(([key, value]) => {
+      console.log(`${key}:`, value);
+    });
+
+    try {
+      const response = await fetch("http://localhost:3000/api/leads/client", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await handleApiError(response);
+      setSuccess("Request submitted successfully!");
+      setFormData({
+        full_name: "",
+        company_name: "",
+        email: "",
+        phone: "",
+        short_description: "",
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
+    }
   };
 
   return (
@@ -33,19 +71,29 @@ const ClientForm = () => {
             let's ignite your project together!
           </p>
 
-          <form onSubmit={HandleFormSubmition}>
+          <form onSubmit={handleSubmit}>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
+            {success && (
+              <div className="alert alert-success" role="alert">
+                {success}
+              </div>
+            )}
             <div className="form-group mb-2">
               <input
                 type="text"
                 className="form-control"
-                id="FullName"
+                id="full_name"
                 placeholder=" "
-                name="FullName"
-                value={FormData.FullName}
+                name="full_name"
+                value={formData.full_name}
                 onChange={updateFormData}
                 required
               />{" "}
-              <label htmlFor="FullName" className="form-label">
+              <label htmlFor="full_name" className="form-label">
                 Full Name
               </label>
             </div>
@@ -54,14 +102,13 @@ const ClientForm = () => {
               <input
                 type="text"
                 className="form-control"
-                id="CompanyName"
+                id="company_name"
                 placeholder=" "
-                name="CompanyName"
-                value={FormData.CompanyName}
+                name="company_name"
+                value={formData.company_name}
                 onChange={updateFormData}
-                required
               />{" "}
-              <label htmlFor="CompanyName" className="form-label">
+              <label htmlFor="company_name" className="form-label">
                 Company Name
               </label>
             </div>
@@ -70,14 +117,14 @@ const ClientForm = () => {
               <input
                 type="email"
                 className="form-control"
-                id="Email"
+                id="email"
                 placeholder=" "
-                name="Email"
-                value={FormData.Email}
+                name="email"
+                value={formData.email}
                 onChange={updateFormData}
                 required
               />{" "}
-              <label htmlFor="Email" className="form-label">
+              <label htmlFor="email" className="form-label">
                 Email
               </label>
             </div>
@@ -86,15 +133,15 @@ const ClientForm = () => {
               <input
                 type="tel"
                 className="form-control"
-                id="Phone"
+                id="phone"
                 placeholder=" "
-                name="Phone"
-                value={FormData.Phone}
+                name="phone"
+                value={formData.phone}
                 onChange={updateFormData}
                 required
                 pattern="[0-9]{10}"
               />{" "}
-              <label htmlFor="Phone" className="form-label">
+              <label htmlFor="phone" className="form-label">
                 Phone
               </label>
             </div>
@@ -102,15 +149,15 @@ const ClientForm = () => {
             <div className="form-group mb-4">
               <textarea
                 className="form-control"
-                id="Description"
+                id="short_description"
                 placeholder=" "
-                name="Description"
+                name="short_description"
                 rows={3}
-                value={FormData.Description}
+                value={formData.short_description}
                 onChange={updateFormData}
                 required
               />{" "}
-              <label htmlFor="Description" className="form-label">
+              <label htmlFor="short_description" className="form-label">
                 Short Project Description/Need
               </label>
             </div>

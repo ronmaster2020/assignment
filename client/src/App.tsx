@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ClientForm from "./components/ClientForm";
@@ -9,6 +9,12 @@ import InfoCard from "./components/InfoCard";
 import HeroSection from "./components/HeroSection";
 
 function App() {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleFormSubmit = () => {
+    setFormSubmitted(true);
+  };
+
   return (
     <div className="page-container bg-light">
       {/* Header */}
@@ -27,7 +33,6 @@ function App() {
             results so fast, it will leave you (pleasantly) shocked!"
           />
         </div>
-
         {/* Unique Card */}
         <InfoCard
           title="Who We Are"
@@ -39,7 +44,6 @@ function App() {
             with unmatched efficiency and speed. We don't fear challenges – we
             thrive on them."
         />
-
         {/* Other sections */}
         <h5 className="section-heading mt-5">Our Services</h5>
         <IconParagraph
@@ -81,7 +85,6 @@ function App() {
               quality and commit to a speed that will help your startup reach the market before competitors.'
           />
         </div>
-
         <div className="mt-4">
           <TextSection
             heading="Who We Are For?"
@@ -93,10 +96,19 @@ function App() {
           development solution.'
           />
         </div>
-
         <h5 className="section-heading mt-5 mb-4">Contact Us</h5>
-        <ClientForm />
-        <CandidateForm />
+        <div className="container">
+          {formSubmitted ? (
+            <div className="alert alert-success text-center">
+              Thank you! Your message has been received. 🚀
+            </div>
+          ) : (
+            <>
+              <ClientForm onSubmitSuccess={handleFormSubmit} />
+              <CandidateForm onSubmitSuccess={handleFormSubmit} />
+            </>
+          )}
+        </div>
       </main>
       <div className="footer-wrapper">
         <footer className="footer">

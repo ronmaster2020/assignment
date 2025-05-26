@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { ApiError, handleApiError } from "../utils/apiError";
 
-const CandidateForm = () => {
+interface Props {
+  onSubmitSuccess: () => void;
+}
+
+const CandidateForm = ({ onSubmitSuccess }: Props) => {
   const [formData, setFormData] = useState<{
     full_name: string;
     email: string;
@@ -57,14 +61,9 @@ const CandidateForm = () => {
       );
 
       const data = await handleApiError(response);
-      setSuccess("Application submitted successfully!");
-      // Reset form
-      setFormData({
-        full_name: "",
-        email: "",
-        phone: "",
-        resume: "",
-      });
+
+      // Success!
+      onSubmitSuccess();
     } catch (error) {
       if (error instanceof ApiError) {
         setError(error.message);

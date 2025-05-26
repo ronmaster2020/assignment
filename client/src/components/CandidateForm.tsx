@@ -1,7 +1,44 @@
-import React from "react";
-import type { ReactNode } from "react";
+import React, { useState } from "react";
+
+type FormData = {
+  FullName: string;
+  Email: string;
+  Phone: string;
+  Resume: File | string;
+};
 
 const CandidateForm = () => {
+  const [formData, setFormData] = useState<FormData>({
+    FullName: "",
+    Email: "",
+    Phone: "",
+    Resume: "",
+  });
+
+  const updateFormData = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = event.target;
+
+    if (type === "file") {
+      const fileInput = event.target as HTMLInputElement;
+      const file = fileInput.files?.[0];
+      setFormData((prev) => ({
+        ...prev,
+        [name]: file || "",
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="form-container container">
       <div className="row justify-content-center">
@@ -11,7 +48,7 @@ const CandidateForm = () => {
             Want to Join a Fast-Paced, Impactful Team?
           </p>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group mb-2">
               <input
                 type="text"
@@ -19,7 +56,8 @@ const CandidateForm = () => {
                 id="FullName"
                 placeholder=" "
                 name="FullName"
-                value=""
+                value={formData.FullName}
+                onChange={updateFormData}
                 required
               />{" "}
               <label htmlFor="FullName" className="form-label">
@@ -29,12 +67,13 @@ const CandidateForm = () => {
 
             <div className="form-group mb-2">
               <input
-                type="Email"
+                type="email"
                 className="form-control"
                 id="Email"
                 placeholder=" "
                 name="Email"
-                value=""
+                value={formData.Email}
+                onChange={updateFormData}
                 required
               />{" "}
               <label htmlFor="Email" className="form-label">
@@ -44,13 +83,15 @@ const CandidateForm = () => {
 
             <div className="form-group mb-2">
               <input
-                type="Phone"
+                type="tel"
                 className="form-control"
                 id="Phone"
                 placeholder=" "
                 name="Phone"
-                value=""
+                value={formData.Phone}
+                onChange={updateFormData}
                 required
+                pattern="[0-9]{10}"
               />{" "}
               <label htmlFor="Phone" className="form-label">
                 Phone
@@ -59,7 +100,13 @@ const CandidateForm = () => {
 
             <div className="form-group mb-4">
               <div className="file-upload">
-                <input type="file" accept=".pdf" />
+                <input
+                  type="file"
+                  id="Resume"
+                  name="Resume"
+                  accept=".pdf"
+                  onChange={updateFormData}
+                />
                 <div className="icon-wrapper">
                   <img
                     className="icon"

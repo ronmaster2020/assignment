@@ -1,7 +1,28 @@
-import React from "react";
-import type { ReactNode } from "react";
+import React, { useState } from "react";
 
 const ClientForm = () => {
+  const [FormData, setFormData] = useState({
+    FullName: "",
+    CompanyName: "",
+    Email: "",
+    Phone: "",
+    Description: "",
+  });
+
+  const updateFormData = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const HandleFormSubmition = (event: React.FormEvent) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="form-container container mb-4">
       <div className="row justify-content-center">
@@ -12,7 +33,7 @@ const ClientForm = () => {
             let's ignite your project together!
           </p>
 
-          <form>
+          <form onSubmit={HandleFormSubmition}>
             <div className="form-group mb-2">
               <input
                 type="text"
@@ -20,7 +41,8 @@ const ClientForm = () => {
                 id="FullName"
                 placeholder=" "
                 name="FullName"
-                value=""
+                value={FormData.FullName}
+                onChange={updateFormData}
                 required
               />{" "}
               <label htmlFor="FullName" className="form-label">
@@ -30,12 +52,13 @@ const ClientForm = () => {
 
             <div className="form-group mb-2">
               <input
-                type="Company Name"
+                type="text"
                 className="form-control"
                 id="CompanyName"
                 placeholder=" "
                 name="CompanyName"
-                value=""
+                value={FormData.CompanyName}
+                onChange={updateFormData}
                 required
               />{" "}
               <label htmlFor="CompanyName" className="form-label">
@@ -45,12 +68,13 @@ const ClientForm = () => {
 
             <div className="form-group mb-2">
               <input
-                type="Email"
+                type="email"
                 className="form-control"
                 id="Email"
                 placeholder=" "
                 name="Email"
-                value=""
+                value={FormData.Email}
+                onChange={updateFormData}
                 required
               />{" "}
               <label htmlFor="Email" className="form-label">
@@ -60,13 +84,15 @@ const ClientForm = () => {
 
             <div className="form-group mb-2">
               <input
-                type="Phone"
+                type="tel"
                 className="form-control"
                 id="Phone"
                 placeholder=" "
                 name="Phone"
-                value=""
+                value={FormData.Phone}
+                onChange={updateFormData}
                 required
+                pattern="[0-9]{10}"
               />{" "}
               <label htmlFor="Phone" className="form-label">
                 Phone
@@ -80,6 +106,8 @@ const ClientForm = () => {
                 placeholder=" "
                 name="Description"
                 rows={3}
+                value={FormData.Description}
+                onChange={updateFormData}
                 required
               />{" "}
               <label htmlFor="Description" className="form-label">

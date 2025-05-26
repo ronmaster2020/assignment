@@ -60,7 +60,7 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
         }
       );
 
-      const data = await handleApiError(response);
+      await handleApiError(response);
 
       // Success!
       onSubmitSuccess();

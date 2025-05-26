@@ -47,7 +47,7 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
         body: JSON.stringify(formData),
       });
 
-      const data = await handleApiError(response);
+      await handleApiError(response);
 
       // Success!
       onSubmitSuccess();

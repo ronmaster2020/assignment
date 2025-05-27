@@ -27,7 +27,7 @@ function App() {
       <main>
         <div className="container p-0">
           <div className="row justify-content-center">
-            <div className="col-sm-12 col-md-8 col-lg-6">
+            <div className="col-sm-12 col-md-10 col-lg-8">
               <div className="pb-3">
                 <HeroSection
                   title="Igniting Your Development at Record Speed!"
@@ -102,17 +102,23 @@ function App() {
               </div>
               <h5 className="section-heading mt-5 mb-4">Contact Us</h5>
               <div className="container mb-4 pb-2 px-0">
-                {formSubmitted ? (
-                  <SuccessMessage
-                    heading="Thanks from SprintIgnite!"
-                    message="We've received your details and are on it! Expect a swift response from our team. We're ready to get things moving!"
-                  />
-                ) : (
-                  <>
-                    <ClientForm onSubmitSuccess={handleFormSubmit} />
-                    <CandidateForm onSubmitSuccess={handleFormSubmit} />
-                  </>
-                )}
+                <div className="row justify-content-center">
+                  <div className="col" style={{ maxWidth: "600px" }}>
+                    {formSubmitted ? (
+                      <SuccessMessage
+                        heading="Thanks from SprintIgnite!"
+                        message="We've received your details and are on it! Expect a swift response from our team. We're ready to get things moving!"
+                      />
+                    ) : (
+                      <>
+                        <div className="mb-4">
+                          <ClientForm onSubmitSuccess={handleFormSubmit} />
+                        </div>
+                        <CandidateForm onSubmitSuccess={handleFormSubmit} />
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

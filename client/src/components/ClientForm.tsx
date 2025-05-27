@@ -61,7 +61,7 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
   };
 
   return (
-    <div className="form-container container mb-4">
+    <div className="form-container container">
       <div className="row justify-content-center">
         <div className="col">
           <h5 className="form-heading text-start">For Potential Clients</h5>

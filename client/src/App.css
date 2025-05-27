@@ -328,3 +328,13 @@ main {
   line-height: 24px;
   text-align: center;
 }
+
+.form-container .row .form-width {
+  max-width: 1000px;
+}
+
+@media (min-width: 768px) {
+  .form-container .row {
+    justify-content: start !important;
+  }
+}

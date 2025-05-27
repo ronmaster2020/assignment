@@ -76,7 +76,7 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
   return (
     <div className="form-container container">
       <div className="row justify-content-center">
-        <div className="col-md-5">
+        <div className="col">
           <h5 className="form-heading text-start">For Potential Candidates</h5>
           <p className="form-description text-start text-muted">
             Want to Join a Fast-Paced, Impactful Team?

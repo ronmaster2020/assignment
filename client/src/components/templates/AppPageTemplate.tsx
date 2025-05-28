@@ -105,11 +105,14 @@ const AppPageTemplate = () => {
                 </TextSection>
               </div>
 
-              <h5 className="section-heading mt-5 mb-4">Contact Us</h5>
-              <FormContainer
-                formSubmitted={formSubmitted}
-                handleFormSubmit={handleFormSubmit}
-              />
+              <div className="mt-5 mb-4">
+                <TextSection heading="Contact Us">
+                  <FormContainer
+                    formSubmitted={formSubmitted}
+                    handleFormSubmit={handleFormSubmit}
+                  />
+                </TextSection>
+              </div>
             </div>
           </div>
         </div>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import Header from "./components/organisms/Header";
+import Footer from "./components/organisms/Footer";
 import FormContainer from "./components/organisms/FormContainer";
 import IconParagraph from "./components/molecules/IconParagraph";
 import TextSection from "./components/organisms/TextSection";
@@ -113,21 +115,3 @@ function App() {
 }
 
 export default App;
-
-function Header() {
-  return (
-    <header className="header fixed-top d-flex justify-content-center align-items-center bg-dark">
-      <div className="header-logo"></div>
-    </header>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="footer-wrapper">
-      <footer className="footer">
-        © 2025 Sprint Ignite. All rights reserved.
-      </footer>
-    </div>
-  );
-}

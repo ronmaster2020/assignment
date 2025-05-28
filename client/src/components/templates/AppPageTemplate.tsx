@@ -3,7 +3,7 @@ import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
 import FormContainer from "../organisms/FormContainer";
 import IconParagraph from "../molecules/IconParagraph";
-import TextSection from "../molecules/TextSection";
+import Section from "../molecules/Section";
 import InfoCard from "../organisms/InfoCard";
 import HeroSection from "../organisms/HeroSection";
 
@@ -45,7 +45,7 @@ const AppPageTemplate = () => {
               />
               {/* Other sections */}
               <div className="mt-5">
-                <TextSection heading="Our Services">
+                <Section heading="Our Services">
                   <IconParagraph
                     icon="/icons/Icon_bolt.png"
                     alt="bolt icon"
@@ -74,10 +74,10 @@ const AppPageTemplate = () => {
                           development teams, precisely tailored to your project\'s needs and
                           scope."
                   />
-                </TextSection>
+                </Section>
               </div>
               <div className="mt-5">
-                <TextSection heading="Our Specialization - Your Advantage!">
+                <Section heading="Our Specialization - Your Advantage!">
                   <p className="section-paragraph text-start pl">
                     Sprintignite&apos;s specialty is taking projects that other
                     companies would call "impossible on this deadline" – and
@@ -89,10 +89,10 @@ const AppPageTemplate = () => {
                     speed that will help your startup reach the market before
                     competitors.
                   </p>
-                </TextSection>
+                </Section>
               </div>
               <div className="mt-4">
-                <TextSection heading="Who We Are For?">
+                <Section heading="Who We Are For?">
                   <p className="section-paragraph text-start pl">
                     Startups needing to launch an MVP (Minimum Viable Product)
                     in record time. Companies hitting a development bottleneck
@@ -102,16 +102,16 @@ const AppPageTemplate = () => {
                     willing to invest for a fast, high-quality development
                     solution.
                   </p>
-                </TextSection>
+                </Section>
               </div>
 
               <div className="mt-5 mb-4">
-                <TextSection heading="Contact Us">
+                <Section heading="Contact Us">
                   <FormContainer
                     formSubmitted={formSubmitted}
                     handleFormSubmit={handleFormSubmit}
                   />
-                </TextSection>
+                </Section>
               </div>
             </div>
           </div>

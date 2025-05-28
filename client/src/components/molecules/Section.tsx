@@ -3,7 +3,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const TextSection = ({ heading, children }: Props) => {
+const Section = ({ heading, children }: Props) => {
   return (
     <>
       <h5 className="section-heading">{heading}</h5>
@@ -14,4 +14,4 @@ const TextSection = ({ heading, children }: Props) => {
   );
 };
 
-export default TextSection;
+export default Section;

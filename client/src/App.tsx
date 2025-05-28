@@ -1,13 +1,12 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import ClientForm from "./components/organisms/ClientForm";
-import CandidateForm from "./components/organisms/CandidateForm";
+
+import FormContainer from "./components/organisms/FormContainer";
 import IconParagraph from "./components/molecules/IconParagraph";
 import TextSection from "./components/organisms/TextSection";
 import InfoCard from "./components/organisms/InfoCard";
 import HeroSection from "./components/organisms/HeroSection";
-import SuccessMessage from "./components/molecules/SuccessMessage";
 
 function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -97,26 +96,12 @@ function App() {
                 development solution.'
                 />
               </div>
+
               <h5 className="section-heading mt-5 mb-4">Contact Us</h5>
-              <div className="container mb-4 pb-2 px-0">
-                <div className="row justify-content-center">
-                  <div className="col" style={{ maxWidth: "600px" }}>
-                    {formSubmitted ? (
-                      <SuccessMessage
-                        heading="Thanks from SprintIgnite!"
-                        message="We've received your details and are on it! Expect a swift response from our team. We're ready to get things moving!"
-                      />
-                    ) : (
-                      <>
-                        <div className="mb-4">
-                          <ClientForm onSubmitSuccess={handleFormSubmit} />
-                        </div>
-                        <CandidateForm onSubmitSuccess={handleFormSubmit} />
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <FormContainer
+                formSubmitted={formSubmitted}
+                handleFormSubmit={handleFormSubmit}
+              />
             </div>
           </div>
         </div>

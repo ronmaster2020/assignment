@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ApiError, handleApiError } from "../utils/apiError";
+import useFormSubmit from "../hooks/useFormSubmit";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -14,8 +14,11 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
     short_description: "",
   });
 
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string>("");
+  const { error, handleSubmit } = useFormSubmit({
+    endpoint: "client",
+    onSubmitSuccess,
+    isFormData: false,
+  });
 
   const updateFormData = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -27,37 +30,9 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
     }));
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError("");
-    setSuccess("");
-
-    // Log form data
-    console.log("Sending data:");
-    Object.entries(formData).forEach(([key, value]) => {
-      console.log(`${key}:`, value);
-    });
-
-    try {
-      const response = await fetch("http://localhost:3000/api/leads/client", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      await handleApiError(response);
-
-      // Success!
-      onSubmitSuccess();
-    } catch (error) {
-      if (error instanceof ApiError) {
-        setError(error.message);
-      } else {
-        setError("An unexpected error occurred");
-      }
-    }
+    await handleSubmit(formData);
   };
 
   return (
@@ -70,15 +45,10 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
             let's ignite your project together!
           </p>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={onSubmit}>
             {error && (
               <div className="alert alert-danger" role="alert">
                 {error}
-              </div>
-            )}
-            {success && (
-              <div className="alert alert-success" role="alert">
-                {success}
               </div>
             )}
             <div className="form-group mb-2">

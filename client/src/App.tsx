@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import ClientForm from "./components/ClientForm";
-import CandidateForm from "./components/CandidateForm";
+import ClientForm from "./components/organisms/ClientForm";
+import CandidateForm from "./components/organisms/CandidateForm";
 import IconParagraph from "./components/molecules/IconParagraph";
-import TextSection from "./components/TextSection";
-import InfoCard from "./components/InfoCard";
-import HeroSection from "./components/HeroSection";
-import SuccessMessage from "./components/SuccessMessage";
+import TextSection from "./components/organisms/TextSection";
+import InfoCard from "./components/organisms/InfoCard";
+import HeroSection from "./components/organisms/HeroSection";
+import SuccessMessage from "./components/molecules/SuccessMessage";
 
 function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);

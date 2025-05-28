@@ -1,6 +1,7 @@
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const ApiError = require("../utils/ApiError");
 
 // Create uploads directory if it doesn't exist
 const uploadDir = "uploads/resumes";
@@ -22,11 +23,24 @@ const storage = multer.diskStorage({
 
 // File filter
 const fileFilter = (req, file, cb) => {
-  // Accept only PDF files
-  if (file.mimetype === "application/pdf") {
+  // Accept PDF, DOC, and DOCX files
+  const allowedMimeTypes = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ];
+
+  if (allowedMimeTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Only PDF files are allowed!"), false);
+    cb(
+      new ApiError(
+        400,
+        "Invalid file type",
+        "Only PDF, DOC, and DOCX files are allowed"
+      ),
+      false
+    );
   }
 };
 

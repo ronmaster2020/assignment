@@ -107,10 +107,12 @@ const AppPageTemplate = () => {
 
               <div className="mt-4 mb-4">
                 <Section heading="Contact Us">
-                  <FormContainer
-                    formSubmitted={formSubmitted}
-                    handleFormSubmit={handleFormSubmit}
-                  />
+                  <div className="mx-3">
+                    <FormContainer
+                      formSubmitted={formSubmitted}
+                      handleFormSubmit={handleFormSubmit}
+                    />
+                  </div>
                 </Section>
               </div>
             </div>

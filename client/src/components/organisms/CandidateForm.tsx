@@ -58,7 +58,7 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
       <div className="row justify-content-center">
         <div className="col px-0">
           <h5 className="form-heading text-start">For Potential Candidates</h5>
-          <p className="form-description text-start text-muted">
+          <p className="form-description text-start text-muted pb-3">
             Want to Join a Fast-Paced, Impactful Team?
           </p>
 

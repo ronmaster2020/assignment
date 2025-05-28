@@ -40,7 +40,7 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
       <div className="row justify-content-center">
         <div className="col px-0">
           <h5 className="form-heading text-start">For Potential Clients</h5>
-          <p className="form-description text-start text-muted">
+          <p className="form-description text-start text-muted pb-3">
             Deadline looming? Project stuck? Don't wait. Talk to us today and
             let's ignite your project together!
           </p>

@@ -1,0 +1,330 @@
+/* Header styles */
+.header {
+  height: 80px;
+  background-color: #212529;
+}
+
+.header-logo {
+  width: 157px;
+  height: 109px;
+  background-image: url("https://assets.api.uizard.io/api/cdn/stream/2660c27c-7d28-4f1e-b491-dc3ed295dccd.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+}
+
+/* Main layout */
+.page-container {
+  min-height: 100vh;
+  padding-top: calc(80px + 1.5rem); /* compensate for fixed header */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+/* Main heading */
+.main-heading {
+  color: #007bff;
+  line-height: 40px;
+}
+
+/* Sub paragraph under h1 */
+.main-description {
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Unique Card (Who We Are) */
+.info-card {
+  background-color: #007bff;
+  border-radius: 24px;
+  color: #fff;
+  width: 100%;
+}
+
+.info-card h5 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.info-card p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Common section heading */
+.section-heading {
+  color: #007bff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+/* Paragraph for sections */
+.section-paragraph {
+  color: #333;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.icon-paragraph {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.icon-wrapper {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.pl {
+  padding-left: 1rem;
+}
+
+.form-container .form-heading {
+  font-size: larger;
+}
+
+.form-container .form-description {
+  font-size: small;
+}
+
+.form-container .submit-btn {
+  cursor: pointer;
+  background-color: #cc6f08 !important;
+  color: white !important;
+  border-radius: 24px;
+  font-size: 14px;
+  padding: 8px;
+  transition: all 0.2s ease;
+  border: none !important;
+}
+
+.form-container .submit-btn:hover {
+  background-color: #e67e00 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(204, 111, 8, 0.2);
+  color: white !important;
+}
+
+.form-container .submit-btn:active {
+  background-color: #b35a00 !important;
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(204, 111, 8, 0.2);
+  color: white !important;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #343434;
+  color: #d9dfe7;
+  font-weight: 500;
+  box-sizing: border-box;
+  border-radius: 24px;
+  transition: all 0.2s ease;
+}
+
+/* Handle autofill styles */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus,
+.form-group input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #343434 inset !important;
+  -webkit-text-fill-color: #d9dfe7 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-group input::selection,
+.form-group textarea::selection {
+  background-color: #60a5fa;
+  color: #ffffff;
+}
+
+.form-group input::-moz-selection,
+.form-group textarea::-moz-selection {
+  background-color: #60a5fa;
+  color: #ffffff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #60a5fa;
+  background-color: #343434;
+  color: #d9dfe7;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-group label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 8px;
+  font-size: 16px;
+  color: #94a3b8;
+  background-color: #343434;
+  border-radius: 24px;
+  padding: 4px;
+  transition: 0.2s ease all;
+  pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown):focus + label,
+.form-group textarea:not(:placeholder-shown):focus + label {
+  top: 8px;
+  left: 14px;
+  font-size: 12px;
+  color: #60a5fa;
+  background-color: transparent;
+}
+
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: 8px;
+  left: 14px;
+  font-size: 12px;
+  color: #94a3b8;
+  background-color: transparent;
+}
+
+.form-group .file-upload {
+  width: 100%;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 24px;
+  background-color: #343434;
+  color: #94a3b8;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.form-group .file-upload input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.file-upload .icon-wrapper {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.file-upload .icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.file-upload div,
+.file-upload small {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.file-upload small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.form-group .file-upload:hover {
+  border-color: #60a5fa;
+  color: #60a5fa;
+}
+
+.footer-wrapper {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  height: 76px;
+  background-color: #212529;
+  margin-top: auto;
+  font-size: smaller;
+  color: rgb(221, 221, 221);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-message-container {
+  margin-bottom: 40px;
+}
+
+.success-message-container .success-message-heading {
+  color: #ff6f00;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+
+.success-message-container .success-message-text {
+  color: #ff6f00;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}

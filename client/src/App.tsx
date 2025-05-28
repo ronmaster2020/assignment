@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ClientForm from "./components/ClientForm";
 import CandidateForm from "./components/CandidateForm";
-import IconParagraph from "./components/IconParagraph";
+import IconParagraph from "./components/molecules/IconParagraph";
 import TextSection from "./components/TextSection";
 import InfoCard from "./components/InfoCard";
 import HeroSection from "./components/HeroSection";

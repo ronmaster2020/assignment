@@ -327,3 +327,7 @@ main {
   line-height: 24px;
   text-align: center;
 }
+
+.section-body p {
+  margin-bottom: 0;
+}

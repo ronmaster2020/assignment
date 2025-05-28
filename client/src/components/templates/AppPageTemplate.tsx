@@ -76,9 +76,9 @@ const AppPageTemplate = () => {
                   />
                 </Section>
               </div>
-              <div className="mt-5">
+              <div className="mt-5 pl">
                 <Section heading="Our Specialization - Your Advantage!">
-                  <p className="section-paragraph text-start pl">
+                  <p className="section-paragraph text-start">
                     Sprintignite&apos;s specialty is taking projects that other
                     companies would call "impossible on this deadline" – and
                     proving otherwise. We understand that sometimes you need to
@@ -105,7 +105,7 @@ const AppPageTemplate = () => {
                 </Section>
               </div>
 
-              <div className="mt-5 mb-4">
+              <div className="mt-4 mb-4 pl">
                 <Section heading="Contact Us">
                   <FormContainer
                     formSubmitted={formSubmitted}

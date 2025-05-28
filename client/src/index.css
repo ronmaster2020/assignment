@@ -33,14 +33,12 @@ main {
 /* Main heading */
 .main-heading {
   color: #007bff;
-  line-height: 40px;
 }
 
 /* Sub paragraph under h1 */
 .main-description {
   color: #333;
   font-size: 14px;
-  line-height: 20px;
 }
 
 /* Unique Card (Who We Are) */
@@ -54,12 +52,10 @@ main {
 .info-card h5 {
   font-size: 20px;
   font-weight: 700;
-  line-height: 28px;
 }
 
 .info-card p {
   font-size: 16px;
-  line-height: 24px;
 }
 
 /* Common section heading */
@@ -67,14 +63,12 @@ main {
   color: #007bff;
   font-size: 20px;
   font-weight: 700;
-  line-height: 28px;
 }
 
 /* Paragraph for sections */
 .section-paragraph {
   color: #333;
   font-size: 16px;
-  line-height: 24px;
 }
 
 .icon-paragraph {
@@ -317,7 +311,6 @@ main {
   color: #ff6f00;
   font-size: 18px;
   font-weight: 600;
-  line-height: 24px;
   text-align: center;
 }
 

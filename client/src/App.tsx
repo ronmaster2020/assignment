@@ -18,10 +18,7 @@ function App() {
 
   return (
     <div className="page-container bg-light">
-      {/* Header */}
-      <header className="header fixed-top d-flex justify-content-center align-items-center bg-dark">
-        <div className="header-logo"></div>
-      </header>
+      <Header />
 
       {/* Body */}
       <main>
@@ -124,13 +121,28 @@ function App() {
           </div>
         </div>
       </main>
-      <div className="footer-wrapper">
-        <footer className="footer">
-          © 2025 Sprint Ignite. All rights reserved.
-        </footer>
-      </div>
+
+      <Footer />
     </div>
   );
 }
 
 export default App;
+
+function Header() {
+  return (
+    <header className="header fixed-top d-flex justify-content-center align-items-center bg-dark">
+      <div className="header-logo"></div>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <div className="footer-wrapper">
+      <footer className="footer">
+        © 2025 Sprint Ignite. All rights reserved.
+      </footer>
+    </div>
+  );
+}

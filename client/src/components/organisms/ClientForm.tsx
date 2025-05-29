@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
+import TextareaField from "../molecules/TextareaField";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -91,21 +92,14 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
               required
             />
 
-            <div className="form-group mb-4">
-              <textarea
-                className="form-control"
-                id="short_description"
-                placeholder=" "
-                name="short_description"
-                rows={3}
-                value={formData.short_description}
-                onChange={updateFormData}
-                required
-              />
-              <label htmlFor="short_description" className="form-label">
-                Short Project Description/Need
-              </label>
-            </div>
+            <TextareaField
+              label="Short Project Description/Need"
+              name="short_description"
+              placeholder=" "
+              value={formData.short_description}
+              onChange={updateFormData}
+              required
+            />
 
             <div className="d-grid">
               <button type="submit" className="btn submit-btn">

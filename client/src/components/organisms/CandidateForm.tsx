@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
 import Button from "../atoms/Button";
+import FileUpload from "../molecules/FileUpload";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -100,26 +101,7 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
               required
             />
 
-            <div className="form-group">
-              <div className="file-upload">
-                <input
-                  type="file"
-                  id="resume"
-                  name="resume"
-                  accept=".pdf"
-                  onChange={updateFormData}
-                />
-                <div className="icon-wrapper">
-                  <img
-                    className="icon"
-                    src="/icons/Icon_upload.png"
-                    alt="upload icon"
-                  />
-                </div>
-                <div>Upload your CV</div>
-                <small>Drag and drop your file here</small>
-              </div>
-            </div>
+            <FileUpload name="resume" onChange={updateFormData} />
 
             <div className="mt-3">
               <Button type="submit">Apply Now</Button>

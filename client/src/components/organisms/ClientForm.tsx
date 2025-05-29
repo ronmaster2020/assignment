@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useFormSubmit from "../../hooks/useFormSubmit";
+import InputField from "../molecules/InputField";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -45,75 +46,50 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
             let's ignite your project together!
           </p>
 
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="d-grid gap-2">
             {error && (
               <div className="alert alert-danger" role="alert">
                 {error}
               </div>
             )}
-            <div className="form-group mb-2">
-              <input
-                type="text"
-                className="form-control"
-                id="full_name"
-                placeholder=" "
-                name="full_name"
-                value={formData.full_name}
-                onChange={updateFormData}
-                required
-              />{" "}
-              <label htmlFor="full_name" className="form-label">
-                Full Name
-              </label>
-            </div>
+            <InputField
+              label="Full Name"
+              type="text"
+              placeholder=" "
+              name="full_name"
+              value={formData.full_name}
+              onChange={updateFormData}
+              required
+            />
 
-            <div className="form-group mb-2">
-              <input
-                type="text"
-                className="form-control"
-                id="company_name"
-                placeholder=" "
-                name="company_name"
-                value={formData.company_name}
-                onChange={updateFormData}
-              />{" "}
-              <label htmlFor="company_name" className="form-label">
-                Company Name
-              </label>
-            </div>
+            <InputField
+              label="Company Name"
+              type="text"
+              placeholder=" "
+              name="company_name"
+              value={formData.company_name}
+              onChange={updateFormData}
+            />
 
-            <div className="form-group mb-2">
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder=" "
-                name="email"
-                value={formData.email}
-                onChange={updateFormData}
-                required
-              />{" "}
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-            </div>
+            <InputField
+              label="Email"
+              type="email"
+              placeholder=" "
+              name="email"
+              value={formData.email}
+              onChange={updateFormData}
+              required
+            />
 
-            <div className="form-group mb-2">
-              <input
-                type="tel"
-                className="form-control"
-                id="phone"
-                placeholder=" "
-                name="phone"
-                value={formData.phone}
-                onChange={updateFormData}
-                required
-                pattern="[0-9]{10}"
-              />{" "}
-              <label htmlFor="phone" className="form-label">
-                Phone
-              </label>
-            </div>
+            <InputField
+              label="Phone"
+              type="tel"
+              placeholder=" "
+              name="phone"
+              value={formData.phone}
+              onChange={updateFormData}
+              required
+            />
 
             <div className="form-group mb-4">
               <textarea
@@ -125,7 +101,7 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
                 value={formData.short_description}
                 onChange={updateFormData}
                 required
-              />{" "}
+              />
               <label htmlFor="short_description" className="form-label">
                 Short Project Description/Need
               </label>

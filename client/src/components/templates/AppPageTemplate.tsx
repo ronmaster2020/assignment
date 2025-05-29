@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "../organisms/Header";
 import Footer from "../organisms/Footer";
 import FormContainer from "../organisms/FormContainer";
+import ClientForm from "../organisms/ClientForm";
+import CandidateForm from "../organisms/CandidateForm";
 import IconParagraph from "../molecules/IconParagraph";
 import Section from "../molecules/Section";
 import InfoCard from "../organisms/InfoCard";
@@ -109,7 +111,16 @@ const AppPageTemplate = () => {
                 <Section heading="Contact Us">
                   <FormContainer
                     formSubmitted={formSubmitted}
-                    handleFormSubmit={handleFormSubmit}
+                    successHeading="Thanks from SprintIgnite!"
+                    successMessage="We've received your details and are on it! Expect a swift response from our team. We're ready to get things moving!"
+                    forms={
+                      <>
+                        <div className="mb-4">
+                          <ClientForm onSubmitSuccess={handleFormSubmit} />
+                        </div>
+                        <CandidateForm onSubmitSuccess={handleFormSubmit} />
+                      </>
+                    }
                   />
                 </Section>
               </div>

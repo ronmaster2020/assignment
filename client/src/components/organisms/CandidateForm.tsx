@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
+import Button from "../atoms/Button";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -99,7 +100,7 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
               required
             />
 
-            <div className="form-group mb-4">
+            <div className="form-group">
               <div className="file-upload">
                 <input
                   type="file"
@@ -120,10 +121,8 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
               </div>
             </div>
 
-            <div className="d-grid">
-              <button type="submit" className="btn submit-btn">
-                Apply Now
-              </button>
+            <div className="mt-3">
+              <Button type="submit">Apply Now</Button>
             </div>
           </form>
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
 import TextareaField from "../molecules/TextareaField";
+import Button from "../atoms/Button";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -101,10 +102,8 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
               required
             />
 
-            <div className="d-grid">
-              <button type="submit" className="btn submit-btn">
-                Send Request
-              </button>
+            <div className="mt-3">
+              <Button type="submit">Send Request</Button>
             </div>
           </form>
         </div>

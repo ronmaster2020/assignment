@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { UseFormRegister } from "react-hook-form";
 import ErrorMessage from "../atoms/ErrorMessage";
-import "../atoms/Input.css";
+import Input from "../atoms/Input";
 
 interface Props {
   name: string;
@@ -32,7 +32,7 @@ const FileUpload = ({
   return (
     <div className="form-group">
       <div className="file-upload">
-        <input
+        <Input
           type="file"
           accept={accept}
           name={name}

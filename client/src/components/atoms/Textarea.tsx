@@ -1,6 +1,5 @@
 import type { TextareaHTMLAttributes } from "react";
 import type { UseFormRegister } from "react-hook-form";
-import "./Input.css";
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   required?: boolean;

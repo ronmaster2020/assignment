@@ -1,6 +1,6 @@
 import type { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import ErrorMessage from "../atoms/ErrorMessage";
-import "../atoms/Input.css";
+import Input from "../atoms/Input";
 
 interface Props {
   name: string;
@@ -24,17 +24,17 @@ const FileUpload = ({
   return (
     <div className="form-group">
       <div className="file-upload">
-        <input
+        <Input
           type="file"
           accept={accept}
           name={name}
-          className={`form-control ${error ? "input-error" : ""}`}
+          error={!!error}
           onChange={(e) => {
             if (setValue) {
               setValue(name, e.target.files?.[0], { shouldValidate: true });
             }
           }}
-          {...(register && register(name))}
+          register={register}
         />
         <div className="icon-wrapper">
           <img

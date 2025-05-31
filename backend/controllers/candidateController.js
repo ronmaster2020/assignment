@@ -1,12 +1,15 @@
 const ApiError = require("../utils/ApiError");
 const asyncHandler = require("../utils/asyncHandler");
 const pool = require("../config/db");
+const path = require("path");
 
 const candidateController = {
   // Create a new job candidate
   createCandidate: asyncHandler(async (req, res) => {
     const { full_name, email, phone } = req.body;
-    const resume_path = req.file ? req.file.path : null;
+    const resume_path = req.file
+      ? path.join("/uploads/resumes", req.file.filename)
+      : null;
 
     const query = `
             INSERT INTO public.job_candidates (full_name, email, phone, resume_path)

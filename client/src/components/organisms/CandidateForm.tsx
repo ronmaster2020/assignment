@@ -1,37 +1,13 @@
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
 import Button from "../atoms/Button";
 import FileUpload from "../molecules/FileUpload";
-
-const schema = z.object({
-  full_name: z
-    .string()
-    .min(1, "Full name is required")
-    .max(255, "Full name is too long (max: 255 characters)"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number is required"),
-  resume: z
-    .any()
-    .refine((files) => files instanceof FileList && files.length > 0, {
-      message: "File is required",
-    })
-    .refine((files) => {
-      const file = files[0];
-      if (!file) return false;
-      const allowedTypes = [
-        // .pdf, .doc, .docx
-        "application/pdf",
-        "application/msword",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      ];
-      return allowedTypes.includes(file.type);
-    }, "Only .pdf, .doc, and .docx files are allowed"),
-});
-
-type FormFields = z.infer<typeof schema>;
+import {
+  candidateSchema,
+  type CandidateFormFields,
+} from "../../schemas/candidateSchema";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -43,8 +19,8 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<FormFields>({
-    resolver: zodResolver(schema),
+  } = useForm<CandidateFormFields>({
+    resolver: zodResolver(candidateSchema),
   });
 
   const FormSubmit = useFormSubmit({

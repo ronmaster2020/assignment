@@ -1,29 +1,13 @@
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
 import TextareaField from "../molecules/TextareaField";
 import Button from "../atoms/Button";
-
-const schema = z.object({
-  full_name: z
-    .string()
-    .min(1, "Full name is required")
-    .max(255, "Full name is too long (max: 255 characters)"),
-  company_name: z
-    .string()
-    .max(255, "Company name is too long (max: 255 characters)")
-    .optional(),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number is required"),
-  short_description: z
-    .string()
-    .min(1, "Project description is required")
-    .max(1000, "Project description is too long (max: 1000 characters)"),
-});
-
-type FormFields = z.infer<typeof schema>;
+import {
+  clientSchema,
+  type ClientFormFields,
+} from "../../schemas/clientSchema";
 
 interface Props {
   onSubmitSuccess: () => void;
@@ -34,8 +18,8 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormFields>({
-    resolver: zodResolver(schema),
+  } = useForm<ClientFormFields>({
+    resolver: zodResolver(clientSchema),
   });
 
   const FormSubmit = useFormSubmit({

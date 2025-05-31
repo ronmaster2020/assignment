@@ -1,4 +1,5 @@
-import type { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { useState } from "react";
+import type { UseFormRegister } from "react-hook-form";
 import ErrorMessage from "../atoms/ErrorMessage";
 import "../atoms/Input.css";
 
@@ -9,7 +10,6 @@ interface Props {
   accept?: string;
   error?: string;
   register?: UseFormRegister<any>;
-  setValue?: UseFormSetValue<any>;
 }
 
 const FileUpload = ({
@@ -19,8 +19,16 @@ const FileUpload = ({
   subLabel = "Drag and drop your file here (PDF, DOC, DOCX)",
   error,
   register,
-  setValue,
 }: Props) => {
+  const [fileName, setFileName] = useState<string>("");
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFileName(file.name);
+    }
+  };
+
   return (
     <div className="form-group">
       <div className="file-upload">
@@ -29,12 +37,10 @@ const FileUpload = ({
           accept={accept}
           name={name}
           className={`form-control ${error ? "input-error" : ""}`}
-          onChange={(e) => {
-            if (setValue) {
-              setValue(name, e.target.files?.[0], { shouldValidate: true });
-            }
-          }}
-          {...(register && register(name))}
+          {...(register &&
+            register(name, {
+              onChange: handleFileChange,
+            }))}
         />
         <div className="icon-wrapper">
           <img
@@ -46,6 +52,9 @@ const FileUpload = ({
         <div>{label}</div>
         <small>{subLabel}</small>
       </div>
+      {fileName && (
+        <div className="px-3 py-1 text-muted">Selected file: {fileName}</div>
+      )}
       <ErrorMessage message={error} />
     </div>
   );

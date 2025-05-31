@@ -18,7 +18,6 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm<CandidateFormFields>({
     resolver: zodResolver(candidateSchema),
   });
@@ -89,7 +88,6 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
             <FileUpload
               name="resume"
               register={register}
-              setValue={setValue}
               error={
                 typeof errors.resume?.message === "string"
                   ? errors.resume.message

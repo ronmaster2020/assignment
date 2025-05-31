@@ -10,7 +10,7 @@ export const clientSchema = z.object({
     .max(255, "Company name is too long (max: 255 characters)")
     .optional(),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number is required"),
+  phone: z.string().regex(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
   short_description: z
     .string()
     .min(1, "Project description is required")

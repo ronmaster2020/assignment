@@ -6,7 +6,7 @@ export const candidateSchema = z.object({
     .min(1, "Full name is required")
     .max(255, "Full name is too long (max: 255 characters)"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number is required"),
+  phone: z.string().regex(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
   resume: z
     .any()
     .refine((files) => files instanceof FileList && files.length > 0, {

@@ -6,7 +6,7 @@ interface Props {
 const Section = ({ heading, children }: Props) => {
   return (
     <>
-      <h5 className="section-heading fw-bold">{heading}</h5>
+      <h5 className="section-heading fw-bold mb-2">{heading}</h5>
       <div className="section-body d-flex flex-column gap-3 text-start">
         {children}
       </div>

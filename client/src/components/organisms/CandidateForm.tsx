@@ -1,60 +1,54 @@
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
 import Button from "../atoms/Button";
 import FileUpload from "../molecules/FileUpload";
+
+const schema = z.object({
+  full_name: z.string().min(1, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number is required"),
+  resume: z
+    .any()
+    .refine((files) => files instanceof FileList && files.length > 0, {
+      message: "File is required",
+    })
+    .refine((files) => {
+      const file = files[0];
+      if (!file) return false;
+      const allowedTypes = [
+        // .pdf, .doc, .docx
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ];
+      return allowedTypes.includes(file.type);
+    }, "Only .pdf, .doc, and .docx files are allowed"),
+});
+
+type FormFields = z.infer<typeof schema>;
 
 interface Props {
   onSubmitSuccess: () => void;
 }
 
 const CandidateForm = ({ onSubmitSuccess }: Props) => {
-  const [formData, setFormData] = useState<{
-    full_name: string;
-    email: string;
-    phone: string;
-    resume: File | string;
-  }>({
-    full_name: "",
-    email: "",
-    phone: "",
-    resume: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<FormFields>({
+    resolver: zodResolver(schema),
   });
 
-  const { error, handleSubmit } = useFormSubmit({
+  const FormSubmit = useFormSubmit({
     endpoint: "candidate",
     onSubmitSuccess,
     isFormData: true,
   });
-
-  const updateFormData = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value, type } = event.target;
-
-    if (type === "file") {
-      const fileInput = event.target as HTMLInputElement;
-      const file = fileInput.files?.[0];
-      setFormData((prev) => ({
-        ...prev,
-        [name]: file || "",
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
-
-  const onSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-    await handleSubmit(formDataToSend);
-  };
 
   return (
     <div className="form-container container">
@@ -65,43 +59,60 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
             Want to Join a Fast-Paced, Impactful Team?
           </p>
 
-          <form onSubmit={onSubmit} className="d-grid gap-2">
-            {error && (
+          <form
+            onSubmit={handleSubmit(FormSubmit.handleSubmit)}
+            className="d-grid gap-2"
+            encType="multipart/form-data"
+          >
+            {FormSubmit.error && (
               <div className="alert alert-danger" role="alert">
-                {error}
+                {FormSubmit.error}
               </div>
             )}
             <InputField
               label="Full Name"
-              type="text"
               placeholder=" "
               name="full_name"
-              value={formData.full_name}
-              onChange={updateFormData}
-              required
+              register={register}
+              error={!!errors.full_name}
             />
+            {errors.full_name && (
+              <div className="text-danger">{errors.full_name.message}</div>
+            )}
 
             <InputField
               label="Email"
               type="email"
               placeholder=" "
               name="email"
-              value={formData.email}
-              onChange={updateFormData}
-              required
+              register={register}
+              error={!!errors.email}
             />
+            {errors.email && (
+              <div className="text-danger">{errors.email.message}</div>
+            )}
 
             <InputField
               label="Phone"
               type="tel"
               placeholder=" "
               name="phone"
-              value={formData.phone}
-              onChange={updateFormData}
-              required
+              register={register}
+              error={!!errors.phone}
             />
+            {errors.phone && (
+              <div className="text-danger">{errors.phone.message}</div>
+            )}
 
-            <FileUpload name="resume" onChange={updateFormData} />
+            <FileUpload
+              name="resume"
+              register={register}
+              setValue={setValue}
+              error={!!errors.resume}
+            />
+            {typeof errors.resume?.message === "string" && (
+              <div className="text-danger">{errors.resume.message}</div>
+            )}
 
             <div className="mt-3">
               <Button type="submit">Apply Now</Button>

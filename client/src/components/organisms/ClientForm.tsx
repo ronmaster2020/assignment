@@ -1,42 +1,39 @@
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import useFormSubmit from "../../hooks/useFormSubmit";
 import InputField from "../molecules/InputField";
 import TextareaField from "../molecules/TextareaField";
 import Button from "../atoms/Button";
+
+const schema = z.object({
+  full_name: z.string().min(1, "Full name is required"),
+  company_name: z.string().optional(),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number is required"),
+  short_description: z.string().min(1, "Project description is required"),
+});
+
+type FormFields = z.infer<typeof schema>;
 
 interface Props {
   onSubmitSuccess: () => void;
 }
 
 const ClientForm = ({ onSubmitSuccess }: Props) => {
-  const [formData, setFormData] = useState({
-    full_name: "",
-    company_name: "",
-    email: "",
-    phone: "",
-    short_description: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormFields>({
+    resolver: zodResolver(schema),
   });
 
-  const { error, handleSubmit } = useFormSubmit({
+  const FormSubmit = useFormSubmit({
     endpoint: "client",
     onSubmitSuccess,
     isFormData: false,
   });
-
-  const updateFormData = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const onSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    await handleSubmit(formData);
-  };
 
   return (
     <div className="form-container container">
@@ -48,59 +45,71 @@ const ClientForm = ({ onSubmitSuccess }: Props) => {
             let's ignite your project together!
           </p>
 
-          <form onSubmit={onSubmit} className="d-grid gap-2">
-            {error && (
+          <form
+            onSubmit={handleSubmit(FormSubmit.handleSubmit)}
+            className="d-grid gap-2"
+          >
+            {FormSubmit.error && (
               <div className="alert alert-danger" role="alert">
-                {error}
+                {FormSubmit.error}
               </div>
             )}
             <InputField
               label="Full Name"
-              type="text"
               placeholder=" "
               name="full_name"
-              value={formData.full_name}
-              onChange={updateFormData}
-              required
+              register={register}
+              error={!!errors.full_name}
             />
+            {errors.full_name && (
+              <div className="text-danger">{errors.full_name.message}</div>
+            )}
 
             <InputField
               label="Company Name"
-              type="text"
               placeholder=" "
               name="company_name"
-              value={formData.company_name}
-              onChange={updateFormData}
+              register={register}
+              error={!!errors.company_name}
             />
+            {errors.company_name && (
+              <div className="text-danger">{errors.company_name.message}</div>
+            )}
 
             <InputField
               label="Email"
-              type="email"
               placeholder=" "
               name="email"
-              value={formData.email}
-              onChange={updateFormData}
-              required
+              register={register}
+              error={!!errors.email}
             />
+            {errors.email && (
+              <div className="text-danger">{errors.email.message}</div>
+            )}
 
             <InputField
               label="Phone"
-              type="tel"
               placeholder=" "
               name="phone"
-              value={formData.phone}
-              onChange={updateFormData}
-              required
+              register={register}
+              error={!!errors.phone}
             />
+            {errors.phone && (
+              <div className="text-danger">{errors.phone.message}</div>
+            )}
 
             <TextareaField
               label="Short Project Description/Need"
               name="short_description"
               placeholder=" "
-              value={formData.short_description}
-              onChange={updateFormData}
-              required
+              register={register}
+              error={!!errors.short_description}
             />
+            {errors.short_description && (
+              <div className="text-danger">
+                {errors.short_description.message}
+              </div>
+            )}
 
             <div className="mt-3">
               <Button type="submit">Send Request</Button>

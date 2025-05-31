@@ -1,37 +1,39 @@
+import type { UseFormRegister } from "react-hook-form";
 import Textarea from "../atoms/Textarea";
 import Label from "../atoms/Label";
 
-type Props = {
+interface Props {
   label: string;
   name: string;
-  value: string;
   placeholder?: string;
   rows?: number;
   required?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-};
+  register?: UseFormRegister<any>;
+  error?: boolean;
+}
 
 const TextareaField = ({
   label,
   name,
-  value,
   placeholder,
   rows = 4,
-  onChange,
+  register,
   required = false,
-}: Props) => (
-  <div className="form-group">
-    <Textarea
-      id={name}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      rows={rows}
-      required={required}
-    />
-    <Label htmlFor={name}>{label}</Label>
-  </div>
-);
+  error,
+}: Props) => {
+  return (
+    <div className="form-group">
+      <Textarea
+        name={name}
+        placeholder={placeholder}
+        rows={rows}
+        required={required}
+        register={register}
+        error={error}
+      />
+      <Label htmlFor={name}>{label}</Label>
+    </div>
+  );
+};
 
 export default TextareaField;

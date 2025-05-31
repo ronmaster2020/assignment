@@ -1,37 +1,39 @@
 import Input from "../atoms/Input";
 import Label from "../atoms/Label";
+import type { UseFormRegister } from "react-hook-form";
 
-type Props = {
+interface Props {
   label: string;
   name: string;
-  value: string;
   placeholder?: string;
   type?: string;
   required?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  register?: UseFormRegister<any>;
+  error?: boolean;
+}
 
 const InputField = ({
   label,
   name,
-  value,
   placeholder,
   type = "text",
-  onChange,
-  required = false,
-}: Props) => (
-  <div className="form-group">
-    <Input
-      id={name}
-      name={name}
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={required}
-    />
-    <Label htmlFor={name}>{label}</Label>
-  </div>
-);
+  required,
+  register,
+  error,
+}: Props) => {
+  return (
+    <div className="form-group">
+      <Input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        required={required}
+        register={register}
+        error={error}
+      />
+      <Label htmlFor={name}>{label}</Label>
+    </div>
+  );
+};
 
 export default InputField;

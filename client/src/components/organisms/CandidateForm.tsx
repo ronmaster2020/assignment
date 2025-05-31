@@ -7,7 +7,10 @@ import Button from "../atoms/Button";
 import FileUpload from "../molecules/FileUpload";
 
 const schema = z.object({
-  full_name: z.string().min(1, "Full name is required"),
+  full_name: z
+    .string()
+    .min(1, "Full name is required")
+    .max(255, "Full name is too long (max: 255 characters)"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number is required"),
   resume: z

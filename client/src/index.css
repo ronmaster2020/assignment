@@ -133,6 +133,10 @@ main {
   position: relative;
 }
 
+.input-wrapper {
+  position: relative;
+}
+
 .form-group input,
 .form-group textarea {
   width: 100%;

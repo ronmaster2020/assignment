@@ -1,5 +1,5 @@
-import type { ChangeEvent } from "react";
 import type { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import ErrorMessage from "../atoms/ErrorMessage";
 import "../atoms/Input.css";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   label?: string;
   subLabel?: string;
   accept?: string;
-  error?: boolean;
+  error?: string;
   register?: UseFormRegister<any>;
   setValue?: UseFormSetValue<any>;
 }
@@ -46,6 +46,7 @@ const FileUpload = ({
         <div>{label}</div>
         <small>{subLabel}</small>
       </div>
+      <ErrorMessage message={error} />
     </div>
   );
 };

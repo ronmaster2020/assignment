@@ -1,6 +1,7 @@
 import type { UseFormRegister } from "react-hook-form";
 import Textarea from "../atoms/Textarea";
 import Label from "../atoms/Label";
+import ErrorMessage from "../atoms/ErrorMessage";
 
 interface Props {
   label: string;
@@ -9,7 +10,7 @@ interface Props {
   rows?: number;
   required?: boolean;
   register?: UseFormRegister<any>;
-  error?: boolean;
+  error?: string;
 }
 
 const TextareaField = ({
@@ -23,15 +24,18 @@ const TextareaField = ({
 }: Props) => {
   return (
     <div className="form-group">
-      <Textarea
-        name={name}
-        placeholder={placeholder}
-        rows={rows}
-        required={required}
-        register={register}
-        error={error}
-      />
-      <Label htmlFor={name}>{label}</Label>
+      <div className="input-wrapper">
+        <Textarea
+          name={name}
+          placeholder={placeholder}
+          rows={rows}
+          required={required}
+          register={register}
+          error={!!error}
+        />
+        <Label htmlFor={name}>{label}</Label>
+      </div>
+      <ErrorMessage message={error} />
     </div>
   );
 };

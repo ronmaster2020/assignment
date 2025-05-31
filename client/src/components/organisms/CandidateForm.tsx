@@ -77,11 +77,12 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
               placeholder=" "
               name="full_name"
               register={register}
-              error={!!errors.full_name}
+              error={
+                typeof errors.full_name?.message === "string"
+                  ? errors.full_name.message
+                  : undefined
+              }
             />
-            {errors.full_name && (
-              <div className="text-danger">{errors.full_name.message}</div>
-            )}
 
             <InputField
               label="Email"
@@ -89,11 +90,12 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
               placeholder=" "
               name="email"
               register={register}
-              error={!!errors.email}
+              error={
+                typeof errors.email?.message === "string"
+                  ? errors.email.message
+                  : undefined
+              }
             />
-            {errors.email && (
-              <div className="text-danger">{errors.email.message}</div>
-            )}
 
             <InputField
               label="Phone"
@@ -101,21 +103,23 @@ const CandidateForm = ({ onSubmitSuccess }: Props) => {
               placeholder=" "
               name="phone"
               register={register}
-              error={!!errors.phone}
+              error={
+                typeof errors.phone?.message === "string"
+                  ? errors.phone.message
+                  : undefined
+              }
             />
-            {errors.phone && (
-              <div className="text-danger">{errors.phone.message}</div>
-            )}
 
             <FileUpload
               name="resume"
               register={register}
               setValue={setValue}
-              error={!!errors.resume}
+              error={
+                typeof errors.resume?.message === "string"
+                  ? errors.resume.message
+                  : undefined
+              }
             />
-            {typeof errors.resume?.message === "string" && (
-              <div className="text-danger">{errors.resume.message}</div>
-            )}
 
             <div className="mt-3">
               <Button type="submit">Apply Now</Button>
